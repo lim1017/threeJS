@@ -63,3 +63,21 @@ const timeline = gsap.timeline({ defaults: { duration: 1 } });
 timeline.fromTo(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
 timeline.fromTo("nav", { y: "-100%" }, { y: "0%" });
 timeline.fromTo(".title", { opacity: 0 }, { opacity: 1 }, { seconds: 1.5 });
+
+//Mouse Animation
+let mouseDown = false;
+let rgb = [12, 33, 55];
+window.addEventListener("mousedown", () => (mouseDown = true));
+window.addEventListener("mouseup", () => (mouseDown = false));
+
+window.addEventListener("mousemove", (e) => {
+  if (mouseDown) {
+    rgb = [
+      Math.round((e.pageX / sizes.width) * 255),
+      Math.round((e.pageY / sizes.height) * 255),
+      Math.round((e.pageX / sizes.width) * 255),
+    ];
+  }
+  let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
+  gsap.to(mesh.material.color, { r: newColor.r, g: newColor.g, b: newColor.b });
+});
