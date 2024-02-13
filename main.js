@@ -6,10 +6,14 @@ import "./style.css";
 const scene = new THREE.Scene();
 
 // Creating sphere
-const geometry = new THREE.SphereGeometry(3, 64, 64);
-const material = new THREE.MeshStandardMaterial({ color: "#00ff83" });
+const geometry = new THREE.TorusGeometry(0.7, 0.2, 16, 100);
+const material = new THREE.PointsMaterial({
+  color: "#00ff83",
+  roughness: 1,
+  size: 0.02,
+});
 
-const mesh = new THREE.Mesh(geometry, material);
+const mesh = new THREE.Points(geometry, material);
 scene.add(mesh);
 
 const sizes = {
@@ -22,7 +26,7 @@ light.position.set(0, 10, 10);
 scene.add(light);
 
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height);
-camera.position.z = 20;
+camera.position.z = 10;
 scene.add(camera);
 
 // Render
