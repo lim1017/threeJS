@@ -11,33 +11,32 @@ const loader = new FontLoader();
 
 loader.load("fonts/helvetiker_regular.typeface.json", function (font) {
   console.log(font, "loaded");
-  const geometry = new TextGeometry("Hello three.js!", {
-    font: font,
-    size: 80,
-    height: 5,
-    curveSegments: 12,
-    bevelEnabled: true,
-    bevelThickness: 10,
-    bevelSize: 8,
-    bevelOffset: 0,
-    bevelSegments: 5,
-  });
+  // const geometry = new TextGeometry("TOMMY", {
+  //   font: font,
+  //   size: 180,
+  //   height: 5,
+  //   curveSegments: 12,
+  //   bevelEnabled: true,
+  //   bevelThickness: 10,
+  //   bevelSize: 8,
+  //   bevelOffset: 0,
+  //   bevelSegments: 5,
+  // });
 
-  geometry.computeBoundingBox();
+  // geometry.computeBoundingBox();
 
   // Creating sphere
-  // const geometry = new THREE.TorusGeometry(0.7, 0.2, 16, 100);
-  // const material = new THREE.PointsMaterial({
-  //   color: "#00ff83",
-  //   roughness: 1,
-  //   size: 0.02,
-  // });
-  const materials = [
-    new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true }), // front
-    new THREE.MeshPhongMaterial({ color: 0xffffff }), // side
-  ];
+  const geometry = new THREE.SphereGeometry(5, 64, 64);
+  const material = new THREE.PointsMaterial({
+    color: "#00ff83",
+    size: 0.05,
+  });
+  // const materials = [
+  //   new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true }), // front
+  //   new THREE.MeshPhongMaterial({ color: 0xffffff }), // side
+  // ];
 
-  const mesh = new THREE.Mesh(geometry, materials);
+  const mesh = new THREE.Points(geometry, material);
   scene.add(mesh);
 
   const sizes = {
@@ -54,7 +53,7 @@ loader.load("fonts/helvetiker_regular.typeface.json", function (font) {
   scene.add(dirLight);
 
   const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height);
-  camera.position.z = 300;
+  camera.position.z = 20;
   scene.add(camera);
 
   // Render
